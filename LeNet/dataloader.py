@@ -19,3 +19,4 @@ class CIFAR10(Dataset):
 
         label = self.label[0]
 
+
