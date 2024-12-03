@@ -1,9 +1,9 @@
 import torch as nn
 
 
-def train(model, epochs=int, train_dataloader, optimizer, loss_fn, verbose=True):
+def train(model, train_dataloader, optimizer, loss_fn, verbose=True):
     model.train()
-    losses = []
+    losses = 0
     for images, label in tqdm(train_dataloader):
 
         optimizer.zero_grad()
@@ -12,12 +12,9 @@ def train(model, epochs=int, train_dataloader, optimizer, loss_fn, verbose=True)
         loss.backward()
         optimizer.step()
 
-        losses.append(loss)
-    
-    if verbose:
-        print(f'Epoch {epoch} | Loss: {loss}')
-
+        losses += loss
+        
     return model, losses
 
-def test(model, test_dataloader):
-    model.eval()
+# def test(model, test_dataloader):
+#     model.eval()
